@@ -48,8 +48,13 @@ class TitleScreen:
         self.logged_in_state_label.pack(fill="x", expand=True, padx=5, pady=5)
 
         if self.logged_in_state.get() != "Logged In as Guest":
+            self.launch_button = ttk.Button(self.root, text="Launch Cappastona", bootstyle="success")
+            self.launch_button.pack(expand=True, padx=5, pady=5, ipadx=200, ipady=100)
+
             self.logout_button = ttk.Button(self.root, text="Log Out", bootstyle="danger", command=self.logout)
             self.logout_button.pack(expand=True, padx=5, pady=5, ipadx=50, ipady=20, side="bottom")
+
+
 
 
 
@@ -199,8 +204,10 @@ class TitleScreen:
                 widget.pack_forget()
 
     def logout(self):
-        self.logged_in_state.set("Logged In as Guest")
-        tkinter.messagebox.showinfo("Success", "Logged Out!")
+
+        confirm = tkinter.messagebox.askyesno("Confirmation", "Do you really want to log out?")
+        if confirm:
+            self.logged_in_state.set("Logged In as Guest")
 
         self.back()
 
