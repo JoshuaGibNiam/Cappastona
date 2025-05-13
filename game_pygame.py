@@ -2,7 +2,7 @@ import pygame
 from pygame import key
 from player import Player
 from walls import Wall
-from enemies import enemy_1
+from enemies import *
 
 #Initialize sprites
 player = Player(750, 0)  ##top left corner
@@ -49,7 +49,9 @@ while run:
                    [(700, 200), True],
                    [(100, 135), False],
                    [(700, 100), True],
-                   [(100, 35), False],])
+                   [(100, 35), False]],
+            )
+
 
 
     ## Clearing
@@ -57,6 +59,8 @@ while run:
 
     for sprite in sprites:
         window.blit(sprite.image, sprite.rect)
+        if isinstance(sprite, enemy_1):
+            window.blit(sprite.fov.image, sprite.fov.rect)
     pygame.display.update()
 
 pygame.quit()
