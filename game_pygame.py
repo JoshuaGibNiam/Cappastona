@@ -4,6 +4,9 @@ from player import Player
 from walls import Wall
 from enemies import *
 from game_manager import GameManager
+from constants import Constants
+C = Constants()
+C.set_level(1)
 
 #Initialize sprites
 player = Player(750, 0)  ##top left corner
@@ -28,32 +31,24 @@ walls = [wall1, wall2, wall3, wall4, wall5, wall6, wall7]
 
 #settings
 pygame.init()
-window = pygame.display.set_mode((800, 600))
-pygame.display.set_caption("Cappastona")
+window = pygame.display.set_mode((C.WINDOW_HEIGHT, C.WINDOW_WIDTH))
+pygame.display.set_caption(C.WINDOW_CAPTION)
 
 clock = pygame.time.Clock()
 run = True
 
+
+
 ##############
 while run:
-    clock.tick(60)
+    clock.tick(C.FPS)  # 60 fps
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
 
     keys = key.get_pressed()
     player.update(keys, walls)
-    enemy1.update([[(100, 535), False],
-                   [(700, 500), True],
-                   [(100, 435), False],
-                   [(700, 400), True],
-                   [(100, 335), False],
-                   [(700, 300), True],
-                   [(100, 235), False],
-                   [(700, 200), True],
-                   [(100, 135), False],
-                   [(700, 100), True],
-                   [(100, 35), False]],
+    enemy1.update(C.ENEMIES
             )
     ## Clearing
     window.fill((255, 255, 255))
