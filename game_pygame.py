@@ -3,6 +3,7 @@ from pygame import key
 from player import Player
 from walls import Wall
 from enemies import *
+from game_manager import GameManager
 
 #Initialize sprites
 player = Player(750, 0)  ##top left corner
@@ -15,7 +16,10 @@ wall5 = Wall(20, 300, 600, 20)
 wall6 = Wall(20, 400, 600, 20)
 wall7 = Wall(20, 500, 600, 20)
 
-enemy1 = enemy_1(100, 535) ##bottom left corner
+enemy1 = enemy_1(100, 535)  # bottom left corner
+enemies = [enemy1]
+
+game_manager = GameManager()
 
 
 ##list of sprites (for shortening code)
@@ -51,11 +55,12 @@ while run:
                    [(700, 100), True],
                    [(100, 35), False]],
             )
-
-
-
     ## Clearing
     window.fill((255, 255, 255))
+
+
+    game_manager.update(player, enemies, keys, window)
+
 
     for sprite in sprites:
         window.blit(sprite.image, sprite.rect)
