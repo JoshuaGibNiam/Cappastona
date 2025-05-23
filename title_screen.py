@@ -2,6 +2,8 @@ import ttkbootstrap as ttk
 import json
 import tkinter.messagebox
 import tkinter as tk
+from game_pygame import *
+import threading
 
 
 class TitleScreen:
@@ -210,6 +212,13 @@ class TitleScreen:
             self.logged_in_state.set("Logged In as Guest")
 
         self.back()
+
+    def launch(self):
+        threading.Thread(target=self.run_game, daemon=True).start()
+
+    def run_game(self):
+        game = CappastonaGame()
+        game.run_game()
 
 
 

@@ -9,5 +9,9 @@ class Constants:
             self.levels = json.load(f)
 
     def set_level(self, level: int) -> None:
-        self.level = level
-        self.ENEMIES = self.levels[f"lvl{self.level}"]["enemies"]
+        self.LEVEL = level
+        self.SPRITES = self.levels[f"lvl{self.LEVEL}"]
+        self.ENEMIES_COUNT = len(self.SPRITES["enemies"])
+        self.PLAYER = self.SPRITES["player"]
+        self.ENEMIES = self.SPRITES["enemies"]
+        self.WALLS = self.SPRITES["walls"]

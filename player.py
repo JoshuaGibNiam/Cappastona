@@ -2,14 +2,14 @@ import pygame
 
 ## Player Sprite
 class Player(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self, xy):
         super().__init__()
 
         self.image = pygame.Surface((50, 50))
         self.image.fill((0, 0, 0))  ## Color black
 
         self.rect = self.image.get_rect()
-        self.rect.topleft = (x, y)
+        self.rect.topleft = (xy[0], xy[1])
 
         self.velocity = 5
 

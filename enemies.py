@@ -1,13 +1,14 @@
 import pygame
 
 class enemy_1(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self, xy, angle=90):
         pygame.sprite.Sprite.__init__(self)
+        self.xy = xy
 
         self.image = pygame.Surface([50, 50], pygame.SRCALPHA)
         self.image.fill((100, 0, 0, 128))
         self.rect = self.image.get_rect()
-        self.rect.topleft = (x, y)
+        self.rect.topleft = (xy[0], xy[1])
 
         self.original_image = self.image.copy()
 
@@ -17,8 +18,8 @@ class enemy_1(pygame.sprite.Sprite):
         self.target_index = 0
         self.list_direction = 1
 
-        self.orig_angle = 90
-        self.angle = 90  #facing right at first
+        self.orig_angle = angle
+        self.angle = angle  #facing right at first
         self.rotation_rate = 10
 
         self.pos = pygame.math.Vector2(self.rect.topleft)
@@ -135,6 +136,15 @@ class enemy_1(pygame.sprite.Sprite):
 
         return int(aligned)
 
+    def __repr__(self):
+        return f"enemy_1({self.xy}, {self.orig_angle})"
+
+    def __str__(self):
+        return f"enemy_1 obj, {self.xy}, {self.orig_angle}"
+
+    def getxy(self):
+        return (self.rect.x, self.rect.y)
+
 
 
 
@@ -171,5 +181,13 @@ class enemy_1_fov(pygame.sprite.Sprite):
         # Rotate image and reposition it to match rotated offset
         self.image = pygame.transform.rotozoom(self.orig_image, self.angle, 1)
         self.rect = self.image.get_rect(center=image_center)
+
+    def __repr__(self):
+        return f"enemy_1_fov({str(self.parent)})"
+
+    def getxy(self) -> tuple:
+        return (self.rect.x, self.rect.y)
+
+
 
 

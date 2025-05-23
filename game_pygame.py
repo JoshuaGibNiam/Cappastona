@@ -5,62 +5,57 @@ from walls import Wall
 from enemies import *
 from game_manager import GameManager
 from constants import Constants
-C = Constants()
-C.set_level(1)
+import pygame
+from pygame import key
 
-#Initialize sprites
-player = Player(750, 0)  ##top left corner
+class CappastonaGame:
+    def __init__(self):
+        self.C = Constants()
+        self.C.set_level(1)
 
-wall1 = Wall(0, 0, 20, 800)
-wall2 = Wall(20, 0, 600, 20)
-wall3 = Wall(20, 100, 600, 20)
-wall4 = Wall(20, 200, 600, 20)
-wall5 = Wall(20, 300, 600, 20)
-wall6 = Wall(20, 400, 600, 20)
-wall7 = Wall(20, 500, 600, 20)
+        # Initialize sprites
+        self.player = Player(self.C.PLAYER["spawn point"])  # top left corner
 
-enemy1 = enemy_1(100, 535)  # bottom left corner
-enemies = [enemy1]
+        self.walls = {}  # dict of wall sprites
+        for index, wall in enumerate(self.C.WALLS.values()):
+            self.walls[index] = eval(wall)
 
-game_manager = GameManager()
+        self.enemy1 = enemy_1(self.C.ENEMIES["enemy1"]["spawn point"], self.C.ENEMIES["enemy1"]["angle"])  # bottom left corner
+        self.enemies = [self.enemy1]
 
+        self.game_manager = GameManager()
 
-##list of sprites (for shortening code)
-sprites = [player, wall1, wall2, wall3, wall4, wall5, wall6, wall7, enemy1]
-walls = [wall1, wall2, wall3, wall4, wall5, wall6, wall7]
+        self.sprites = [self.player] + list(self.walls.values()) + [self.enemy1]
+        self.wall_list = list(self.walls.values())
 
-#settings
-pygame.init()
-window = pygame.display.set_mode((C.WINDOW_HEIGHT, C.WINDOW_WIDTH))
-pygame.display.set_caption(C.WINDOW_CAPTION)
+        # settings
+        pygame.init()
+        self.window = pygame.display.set_mode((self.C.WINDOW_HEIGHT, self.C.WINDOW_WIDTH))
+        pygame.display.set_caption(self.C.WINDOW_CAPTION)
 
-clock = pygame.time.Clock()
-run = True
+        self.clock = pygame.time.Clock()
+        self.run = True
 
+    def run_game(self):
+        while self.run:
+            keys = key.get_pressed()
+            self.clock.tick(self.C.FPS)  # 60 fps
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.run = False
 
+            self.player.update(keys, self.wall_list)
+            self.enemy1.update(self.C.ENEMIES["enemy1"]["path"])
 
-##############
-while run:
-    clock.tick(C.FPS)  # 60 fps
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
+            # Clearing
+            self.window.fill((255, 255, 255))
 
-    keys = key.get_pressed()
-    player.update(keys, walls)
-    enemy1.update(C.ENEMIES
-            )
-    ## Clearing
-    window.fill((255, 255, 255))
+            self.game_manager.update(self.player, self.enemies, keys, self.window)
 
+            for sprite in self.sprites:
+                self.window.blit(sprite.image, sprite.rect)
+                if isinstance(sprite, enemy_1):
+                    self.window.blit(sprite.fov.image, sprite.fov.rect)
+            pygame.display.update()
 
-    game_manager.update(player, enemies, keys, window)
-
-
-    for sprite in sprites:
-        window.blit(sprite.image, sprite.rect)
-        if isinstance(sprite, enemy_1):
-            window.blit(sprite.fov.image, sprite.fov.rect)
-    pygame.display.update()
-
-pygame.quit()
+        pygame.quit()
