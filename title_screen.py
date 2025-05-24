@@ -50,7 +50,7 @@ class TitleScreen:
         self.logged_in_state_label.pack(fill="x", expand=True, padx=5, pady=5)
 
         if self.logged_in_state.get() != "Logged In as Guest":
-            self.launch_button = ttk.Button(self.root, text="Launch Cappastona", bootstyle="success")
+            self.launch_button = ttk.Button(self.root, text="Launch Cappastona", bootstyle="success", command=self.launch)
             self.launch_button.pack(expand=True, padx=5, pady=5, ipadx=200, ipady=100)
 
             self.logout_button = ttk.Button(self.root, text="Log Out", bootstyle="danger", command=self.logout)
