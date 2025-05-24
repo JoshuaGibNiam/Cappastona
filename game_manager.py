@@ -43,8 +43,7 @@ class GameManager:
             self.state = "Ongoing"
             self.player.rect.topleft = (750, 0)
             for enemy in enemies:
-                enemy.rect.topleft = (100, 535)
-                enemy.speed = 3
+                enemy.reset()
             self.player.velocity = 5
 
 

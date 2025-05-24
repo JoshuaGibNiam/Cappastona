@@ -31,5 +31,35 @@
             "wall6": "Wall(20, 400, 600, 20)",
             "wall7": "Wall(20, 500, 600, 20)"
         }
+    },
+    "lvl2": {
+        "player": {"spawn point": [500, 75]},
+        "enemies": {
+            "enemy1": {
+                "spawn point": [300, 75],
+                "path": [
+                    [[300, 75], false],
+                    [[100, 150], true],
+                    [[700, 400], true]
+                ],
+                "angle": 90
+            },
+            "enemy2": {
+                "spawn point": [500, 700],
+                "path": [
+                    [[500, 700], true],
+                    [[100, 50], false]
+                ],
+                "angle": 0
+            }
+        },
+        "walls": {
+            "wall1": "Wall(0, 150, 20, 600)",
+            "wall2": "Wall(20, 150, 40, 20)",
+            "wall3": "Wall(20, 250, 150, 20)",
+            "wall4": "Wall(300, 150, 20, 300)",
+            "wall5": "Wall(20, 650, 170, 20)",
+            "wall6": "Wall(500, 150, 20, 600)"
+        }
     }
 }

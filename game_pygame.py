@@ -11,7 +11,8 @@ from pygame import key
 class CappastonaGame:
     def __init__(self):
         self.C = Constants()
-        self.C.set_level(1)
+        self.level = 2
+        self.C.set_level(self.level)
 
         # Initialize sprites
         self.player = Player(self.C.PLAYER["spawn point"])  # top left corner
@@ -21,11 +22,12 @@ class CappastonaGame:
             self.walls[index] = eval(wall)
 
         self.enemy1 = enemy_1(self.C.ENEMIES["enemy1"]["spawn point"], self.C.ENEMIES["enemy1"]["angle"])  # bottom left corner
-        self.enemies = [self.enemy1]
+        self.enemy2 = enemy_1(self.C.ENEMIES["enemy2"]["spawn point"], self.C.ENEMIES["enemy2"]["angle"])
+        self.enemies = [self.enemy1, self.enemy2]
 
         self.game_manager = GameManager()
 
-        self.sprites = [self.player] + list(self.walls.values()) + [self.enemy1]
+        self.sprites = [self.player] + list(self.walls.values()) + [self.enemy1] + [self.enemy2]
         self.wall_list = list(self.walls.values())
 
         # settings
@@ -46,6 +48,7 @@ class CappastonaGame:
 
             self.player.update(keys, self.wall_list)
             self.enemy1.update(self.C.ENEMIES["enemy1"]["path"])
+            self.enemy2.update(self.C.ENEMIES["enemy2"]["path"])
 
             # Clearing
             self.window.fill((255, 255, 255))
@@ -59,3 +62,7 @@ class CappastonaGame:
             pygame.display.update()
 
         pygame.quit()
+
+if __name__ == "__main__":
+    game = CappastonaGame()
+    game.run_game()
