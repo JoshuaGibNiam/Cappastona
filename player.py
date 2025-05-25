@@ -1,4 +1,6 @@
 import pygame
+from constants import Constants
+C = Constants()
 
 ## Player Sprite
 class Player(pygame.sprite.Sprite):
@@ -39,13 +41,13 @@ class Player(pygame.sprite.Sprite):
                     self.rect.right = sprite.rect.left
 
         ## world border constraints
-        if self.rect.x >= 800 - self.rect.width:
-            self.rect.x = 800 - self.rect.width
+        if self.rect.x >= C.WINDOW_WIDTH - self.rect.width:
+            self.rect.x = C.WINDOW_WIDTH - self.rect.width
         elif self.rect.x <= 0:
             self.rect.x = 0
 
-        if self.rect.y >= 600 - self.rect.height:
-            self.rect.y = 600 - self.rect.height
+        if self.rect.y >= C.WINDOW_HEIGHT - self.rect.height:
+            self.rect.y = C.WINDOW_HEIGHT - self.rect.height
         elif self.rect.y <= 0:
             self.rect.y = 0
 

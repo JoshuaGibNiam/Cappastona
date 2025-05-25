@@ -1,8 +1,8 @@
 import json
 class Constants:
     def __init__(self):
-        self.WINDOW_HEIGHT = 800
-        self.WINDOW_WIDTH = 600
+        self.WINDOW_HEIGHT = 1600
+        self.WINDOW_WIDTH = 1200
         self.WINDOW_CAPTION = "Cappastona"
         self.FPS = 60
         with open('levels.json', 'r') as f:

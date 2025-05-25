@@ -36,7 +36,7 @@ class CappastonaGame:
 
         # settings
         pygame.init()
-        self.window = pygame.display.set_mode((self.C.WINDOW_HEIGHT, self.C.WINDOW_WIDTH))
+        self.window = pygame.display.set_mode((self.C.WINDOW_WIDTH, self.C.WINDOW_HEIGHT), pygame.RESIZABLE)
         pygame.display.set_caption(self.C.WINDOW_CAPTION)
 
         self.clock = pygame.time.Clock()
@@ -58,12 +58,14 @@ class CappastonaGame:
             # Clearing
             self.window.fill((255, 255, 255))
 
-            self.game_manager.update(self.player, list(self.enemies.values()), keys, self.window)
 
             for sprite in self.sprites:
                 self.window.blit(sprite.image, sprite.rect)
                 if isinstance(sprite, enemy_1):
                     self.window.blit(sprite.fov.image, sprite.fov.rect)
+
+
+            self.game_manager.update(self.player, list(self.enemies.values()), keys, self.window)
             pygame.display.update()
 
             # check if player has won and wants to go to the next level
