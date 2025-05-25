@@ -34,73 +34,62 @@ class enemy_1(pygame.sprite.Sprite):
         return bool(check)
 
     def update(self, path):
-        check = 0
-        move_direction = None
-
         """moves in a set list of target points in path
-            path is in [[(x, y), bool], ....] format, where (x, y) is target and bool
-            is the direction to turn (True = move horizontally first, vice versa)"""
+                    path is in [[(x, y), bool], ....] format, where (x, y) is target and bool
+                    is the direction to turn (True = move horizontally first, vice versa)"""
+        print(f"Enemy at {self.rect.topleft}, target {path[self.target_index][0]}")
+        self.path = path
+        self.check = 0
+        self.move_direction = None
 
-        tx, ty = path[self.target_index][0]  #target index
-        direction = path[self.target_index][1]
 
-        if direction:  # move horizontally first
+
+        tx, ty = path[self.target_index][0]  # target index
+        self.direction = path[self.target_index][1]
+
+        if self.direction:  # move horizontally first
             if self.rect.x != tx:
                 if self.rect.x > tx:
                     self.rect.x -= min(self.speed, self.rect.x - tx)
-                    move_direction = "left"
+                    self.move_direction = "left"
                 elif self.rect.x < tx:
                     self.rect.x += min(self.speed, tx - self.rect.x)
-                    move_direction = "right"
+                    self.move_direction = "right"
 
             if self.rect.x == tx:
                 if self.rect.y > ty:
-                    target_angle = 180
-                    if move_direction == "left":
-                        check = self.rotate_toward(target_angle)  # checki will be 1 if angle lines up with target angle
-                    else:
-                        check = self.rotate_toward(target_angle)
+                    self.target_angle = 180
+                    self.check = self.rotate_toward(self.target_angle)
                 else:
-                    target_angle = 0
-                    if move_direction == "left":
-                        check = self.rotate_toward(target_angle)
-                    else:
-                        check = self.rotate_toward(target_angle)
-
+                    self.target_angle = 0
+                    self.check = self.rotate_toward(self.target_angle)
 
             if self.rect.y != ty:  # only move y after x is aligned
-                if check == 1:
+                if self.check == 1:
                     if self.rect.y > ty:
                         self.rect.y -= min(self.speed, self.rect.y - ty)
-
                     elif self.rect.y < ty:
                         self.rect.y += min(self.speed, ty - self.rect.y)
 
-        elif not direction:  # move vertically first
+        else:  # move vertically first
             if self.rect.y != ty:
                 if self.rect.y > ty:
                     self.rect.y -= min(self.speed, self.rect.y - ty)
-                    move_direction = "up"
+                    self.move_direction = "up"
                 elif self.rect.y < ty:
                     self.rect.y += min(self.speed, ty - self.rect.y)
-                    move_direction = "down"
+                    self.move_direction = "down"
 
             if self.rect.y == ty:
                 if self.rect.x > tx:
-                    target_angle = 270
-                    if move_direction == "up":
-                        check = self.rotate_toward(target_angle)
-                    else:
-                        check = self.rotate_toward(target_angle)
+                    self.target_angle = 270
+                    self.check = self.rotate_toward(self.target_angle)
                 else:
-                    target_angle = 90
-                    if move_direction == "up":
-                        check = self.rotate_toward(target_angle)
-                    else:
-                        check = self.rotate_toward(target_angle)
+                    self.target_angle = 90
+                    self.check = self.rotate_toward(self.target_angle)
 
             if self.rect.x != tx:  # only move x after y is aligned
-                if check == 1:
+                if self.check == 1:
                     if self.rect.x > tx:
                         self.rect.x -= min(self.speed, self.rect.x - tx)
                     elif self.rect.x < tx:
@@ -118,6 +107,7 @@ class enemy_1(pygame.sprite.Sprite):
                 self.list_direction = 1
 
         self.fov.update(self.angle + 90)
+
     def rotate_toward(self, target_angle):
         self.angle %= 360
         target_angle %= 360
@@ -154,10 +144,15 @@ class enemy_1(pygame.sprite.Sprite):
         self.image.fill((100, 0, 0, 128))
         self.rect = self.image.get_rect()
         self.rect.topleft = (self.xy[0], self.xy[1])
+        self.speed = 3
 
         self.target_index = 0
         self.list_direction = 1
         self.fov.reset()
+
+        self.direction = self.path[self.target_index][1]
+        self.check = 0
+        self.move_direction = None
 
 
 
