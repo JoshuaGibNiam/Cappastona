@@ -21,13 +21,13 @@ class CappastonaGame:
         for index, wall in enumerate(self.C.WALLS.values()):
             self.walls[index] = eval(wall)
 
-        self.enemy1 = enemy_1(self.C.ENEMIES["enemy1"]["spawn point"], self.C.ENEMIES["enemy1"]["angle"])  # bottom left corner
-        self.enemy2 = enemy_1(self.C.ENEMIES["enemy2"]["spawn point"], self.C.ENEMIES["enemy2"]["angle"])
-        self.enemies = [self.enemy1, self.enemy2]
+        self.enemies = {}
+        for index, enemy in enumerate(self.C.ENEMIES.values()):
+            self.enemies[index+1] = enemy_1(self.C.ENEMIES[f"enemy{index+1}"]["spawn point"])
 
         self.game_manager = GameManager()
 
-        self.sprites = [self.player] + list(self.walls.values()) + [self.enemy1] + [self.enemy2]
+        self.sprites = [self.player] + list(self.walls.values()) + list(self.enemies.values())
         self.wall_list = list(self.walls.values())
 
         # settings
@@ -47,13 +47,13 @@ class CappastonaGame:
                     self.run = False
 
             self.player.update(keys, self.wall_list)
-            self.enemy1.update(self.C.ENEMIES["enemy1"]["path"])
-            self.enemy2.update(self.C.ENEMIES["enemy2"]["path"])
+            for index, value in self.enemies.items():
+                value.update(self.C.ENEMIES[f"enemy{index}"]["path"])
 
             # Clearing
             self.window.fill((255, 255, 255))
 
-            self.game_manager.update(self.player, self.enemies, keys, self.window)
+            self.game_manager.update(self.player, list(self.enemies.values()), keys, self.window)
 
             for sprite in self.sprites:
                 self.window.blit(sprite.image, sprite.rect)
