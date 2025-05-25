@@ -10,29 +10,30 @@ class Player(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect()
         self.rect.topleft = (xy[0], xy[1])
+        self.starting_pos = self.rect.topleft
 
-        self.velocity = 5
+        self.speed = 5
 
     def update(self, keys, sprites):
         ## keybind movement plus wall constraints
         if keys[pygame.K_UP]:
-            self.rect.y -= self.velocity
+            self.rect.y -= self.speed
             #collision
             for sprite in sprites:
                 if self.rect.colliderect(sprite):
                     self.rect.top = sprite.rect.bottom
         if keys[pygame.K_DOWN]:
-            self.rect.y += self.velocity
+            self.rect.y += self.speed
             for sprite in sprites:
                 if self.rect.colliderect(sprite):
                     self.rect.bottom = sprite.rect.top
         if keys[pygame.K_LEFT]:
-            self.rect.x -= self.velocity
+            self.rect.x -= self.speed
             for sprite in sprites:
                 if self.rect.colliderect(sprite):
                     self.rect.left = sprite.rect.right
         if keys[pygame.K_RIGHT]:
-            self.rect.x += self.velocity
+            self.rect.x += self.speed
             for sprite in sprites:
                 if self.rect.colliderect(sprite):
                     self.rect.right = sprite.rect.left
@@ -47,6 +48,10 @@ class Player(pygame.sprite.Sprite):
             self.rect.y = 600 - self.rect.height
         elif self.rect.y <= 0:
             self.rect.y = 0
+
+    def reset(self):
+        self.rect.topleft = (self.starting_pos[0], self.starting_pos[1])
+        self.speed = 5
 
 
 

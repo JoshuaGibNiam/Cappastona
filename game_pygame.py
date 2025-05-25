@@ -7,11 +7,14 @@ from game_manager import GameManager
 from constants import Constants
 import pygame
 from pygame import key
+import json
+import sys
 
 class CappastonaGame:
-    def __init__(self):
+    def __init__(self, user, level=1):
+        self.user = user
         self.C = Constants()
-        self.level = 2
+        self.level = level
         self.C.set_level(self.level)
 
         # Initialize sprites
@@ -30,6 +33,7 @@ class CappastonaGame:
         self.sprites = [self.player] + list(self.walls.values()) + list(self.enemies.values())
         self.wall_list = list(self.walls.values())
 
+
         # settings
         pygame.init()
         self.window = pygame.display.set_mode((self.C.WINDOW_HEIGHT, self.C.WINDOW_WIDTH))
@@ -45,6 +49,7 @@ class CappastonaGame:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.run = False
+                    self.hard_quit()
 
             self.player.update(keys, self.wall_list)
             for index, value in self.enemies.items():
@@ -61,7 +66,23 @@ class CappastonaGame:
                     self.window.blit(sprite.fov.image, sprite.fov.rect)
             pygame.display.update()
 
+            # check if player has won and wants to go to the next level
+            if self.game_manager.state == "Won" and keys[pygame.K_n]:
+                with open("accounts.json", "r") as f:
+                    accounts = json.load(f)
+                accounts[self.user]["level"] += 1
+                with open("accounts.json", "w") as f:
+                    json.dump(accounts, f, indent=4)
+
+                break
+
         pygame.quit()
+        sys.exit()
+
+    def hard_quit(self):
+        self.run = False
+        pygame.quit()
+        sys.exit()
 
 if __name__ == "__main__":
     game = CappastonaGame()

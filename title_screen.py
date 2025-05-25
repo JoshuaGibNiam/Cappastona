@@ -9,7 +9,7 @@ import threading
 class TitleScreen:
     def __init__(self, root):
         self.root = root
-
+        self.root.protocol("WM_DELETE_WINDOW", self.close_pygame)  # close pygame too if this window is close
 
 
         #initializing other stuff
@@ -104,14 +104,16 @@ class TitleScreen:
 
         ## 1. load data
         with open("accounts.json", "r") as file:
-            accounts = json.load(file)
+            self.accounts = json.load(file)
 
         ## 2. conditional statements
-        if self.username.get() in accounts:
+        if self.username.get() in self.accounts:
             ## 2.a if everything is right
-            if self.password.get() == accounts[self.username.get()]["password"]:
+            if self.password.get() == self.accounts[self.username.get()]["password"]:
                 self.logged_in_state.set(f"Logged in as {self.username.get()}")
                 tkinter.messagebox.showinfo("Success", f"Successfully logged in as {self.username.get()}!")
+
+                self.loggedin_account = self.username.get()
 
 
                 # back to home
@@ -217,8 +219,17 @@ class TitleScreen:
         threading.Thread(target=self.run_game, daemon=True).start()
 
     def run_game(self):
-        game = CappastonaGame()
-        game.run_game()
+        with open("accounts.json", "r") as f:
+            self.accounts = json.load(f)
+        self.game = CappastonaGame(self.loggedin_account, self.accounts[self.loggedin_account]["level"])
+        self.game.run_game()
+
+    def close_pygame(self):
+        try:
+            self.game.hard_quit()
+        except AttributeError:
+            pass
+        self.root.destroy()
 
 
 

@@ -160,7 +160,7 @@ class enemy_1(pygame.sprite.Sprite):
 class enemy_1_fov(pygame.sprite.Sprite):
     def __init__(self, parent):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.Surface([100, 50], pygame.SRCALPHA)  # Increase width for a wider FOV
+        self.image = pygame.Surface([100, 50], pygame.SRCALPHA)
         pygame.draw.polygon(self.image, (255, 0, 0, 200), [(0, 0), (0, 50), (100, 25)])  #0, 0    0, 50   100, 25
 
         self.orig_image = self.image.copy()
@@ -178,13 +178,13 @@ class enemy_1_fov(pygame.sprite.Sprite):
     def update(self, angle):
         self.angle = angle
 
-        # Update pivot to the current center of the parent
+
         self.pivot = self.parent.rect.center
 
-        # Rotate the offset vector (stick out to the right of the enemy)
+
         rotated_offset = self.offset.rotate(-self.angle)
 
-        # New position = pivot + rotated offset
+
         image_center = (self.pivot[0] + rotated_offset.x, self.pivot[1] + rotated_offset.y)
 
         # Rotate image and reposition it to match rotated offset
