@@ -175,7 +175,7 @@ class TitleScreen:
     def signup(self):
         """signup stuff"""
         ## 1. Dump into json file
-        account_data = {self.username.get(): {"password" : self.password.get()}}
+        account_data = {self.username.get(): {"password": self.password.get(), "level": 1}}
         with open("accounts.json", "w") as file:
             json.dump(account_data, file, indent=4)
 

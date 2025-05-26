@@ -26,7 +26,7 @@ class CappastonaGame:
 
         self.enemies = {}
         for index, enemy in enumerate(self.C.ENEMIES.values()):
-            self.enemies[index+1] = enemy_1(self.C.ENEMIES[f"enemy{index+1}"]["spawn point"])
+            self.enemies[index] = enemy_1(self.C.ENEMIES[f"enemy{index+1}"]["spawn point"])
 
         self.game_manager = GameManager()
 
@@ -53,7 +53,7 @@ class CappastonaGame:
 
             self.player.update(keys, self.wall_list)
             for index, value in self.enemies.items():
-                value.update(self.C.ENEMIES[f"enemy{index}"]["path"])
+                value.update(self.C.ENEMIES[f"enemy{index+1}"]["path"])
 
             # Clearing
             self.window.fill((255, 255, 255))

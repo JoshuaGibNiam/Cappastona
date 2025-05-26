@@ -1,6 +1,6 @@
 {
-    "admin": {
-        "password": "adminadmin",
-        "level": 2
+    "hui": {
+        "password": "hui",
+        "level": 3
     }
 }
