@@ -1,6 +1,14 @@
 {
+    "hummon": {
+        "password": "hummon",
+        "level": 1
+    },
     "hui": {
         "password": "hui",
-        "level": 3
+        "level": 1
+    },
+    "was": {
+        "password": "111",
+        "level": 1
     }
 }

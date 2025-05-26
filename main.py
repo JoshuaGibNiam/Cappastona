@@ -18,6 +18,9 @@ class TitleScreen:
 
         self.title_screen()
         self.root.mainloop()
+
+        with open("accounts.json", "r") as f:
+            self.accounts = json.load(f)
     def title_screen(self):
         self.root = root
         self.root.title("Cappastona")
@@ -176,8 +179,9 @@ class TitleScreen:
         """signup stuff"""
         ## 1. Dump into json file
         account_data = {self.username.get(): {"password": self.password.get(), "level": 1}}
+        self.accounts[self.username.get()] = {"password": self.password.get(), "level": 1}
         with open("accounts.json", "w") as file:
-            json.dump(account_data, file, indent=4)
+            json.dump(self.accounts, file, indent=4)
 
         ## 2. Messagebox
         tkinter.messagebox.showinfo(title="Success", message=f"You have successfully signed up as {self.username.get()}!")
