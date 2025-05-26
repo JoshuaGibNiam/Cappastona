@@ -212,7 +212,6 @@ class TitleScreen:
         confirm = tkinter.messagebox.askyesno("Confirmation", "Do you really want to log out?")
         if confirm:
             self.logged_in_state.set("Logged In as Guest")
-
         self.back()
 
     def launch(self):

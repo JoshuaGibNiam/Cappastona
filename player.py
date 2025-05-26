@@ -7,7 +7,10 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, xy):
         super().__init__()
 
-        self.image = pygame.Surface((50, 50))
+        self.unscaled_image_normal = pygame.image.load("player_normal.png")
+        self.unscaled_image_killed = pygame.image.load("player_killed.png")
+        self.image_types = [pygame.transform.scale(self.unscaled_image_normal, (50, 50)), pygame.transform.scale(self.unscaled_image_killed, (50, 50))]
+        self.image = self.image_types[0] # normal
         self.image.fill((0, 0, 0))  ## Color black
 
         self.rect = self.image.get_rect()
@@ -54,6 +57,8 @@ class Player(pygame.sprite.Sprite):
     def reset(self):
         self.rect.topleft = (self.starting_pos[0], self.starting_pos[1])
         self.speed = 5
+
+        self.image = self.image_types[0]
 
 
 

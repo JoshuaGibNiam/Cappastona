@@ -4,6 +4,8 @@ class GameManager:
     def __init__(self):
         pygame.init()
         pygame.font.init()
+        pygame.mixer.init()
+        pygame.mixer.music.set_volume(1.0)
 
         self.score = 0
         self.state = "Ongoing"   # "Ongoing", "Won", "Lost"
@@ -12,6 +14,9 @@ class GameManager:
         self.start_time = pygame.time.get_ticks()
         self.score = None
         self.provisional_score = 0
+
+        self.die_sound = pygame.mixer.Sound("die_sound_effect.mp3")
+        self.kill_sound = pygame.mixer.Sound("kill_sound_effect.mp3")
 
     def update(self, player, enemies, keys, window):  # enemies in list
         self.player = player
@@ -33,6 +38,9 @@ class GameManager:
 
             # if fov touching player
             if enemy.fov.rect.colliderect(player.rect):
+
+                self.die_sound.play()
+                self.player.image = self.player.image_types[1]
                 self.state = "Lost"
                 self.end_time = pygame.time.get_ticks()
 
@@ -43,8 +51,8 @@ class GameManager:
                     _enemy.speed = 0
 
             elif player.rect.colliderect(enemy.rect):
+                self.kill_sound.play()
                 enemy.rect.topleft = (-10000, -10000)
-
                 enemy.speed = 0
 
                 self.enemy_killed += 1
