@@ -152,5 +152,263 @@
       "wall7": "Wall(0, 1400, 920, 40)",
       "wall8": "Wall(940, 240, 40, 200)"
     }
+  },
+  "lvl4": {
+    "player": {
+      "spawn point": [60, 80]
+    },
+    "enemies": {
+      "enemy1": {
+        "spawn point": [80, 320],
+        "path": [
+          [[80, 320], false],
+          [[300, 40], true]
+        ],
+        "angle": 90
+      },
+      "enemy2": {
+        "spawn point": [460, 420],
+        "path": [
+          [[460, 420], false],
+          [[460, 60], false]
+        ],
+        "angle": 0
+      },
+      "enemy3": {
+        "spawn point": [80, 520],
+        "path": [
+          [[80, 520], true],
+          [[460, 520], false]
+        ],
+        "angle": 90
+      },
+      "enemy4": {
+        "spawn point": [80, 680],
+        "path": [
+          [[80, 680], true],
+          [[540, 680], true]
+        ],
+        "angle": 90
+      },
+      "enemy5": {
+        "spawn point": [80, 800],
+        "path": [
+          [[80, 680], false],
+          [[700, 520], true]
+        ]
+      },
+      "enemy6": {
+        "spawn point": [320, 940],
+        "path": [
+          [[320, 940], false],
+          [[500, 1080], true]
+        ],
+        "angle": 180
+      },
+      "enemy7": {
+        "spawn point": [700, 820],
+        "path": [
+          [[700, 820], false],
+          [[700, 1160], false]
+        ],
+        "angle": 180
+      },
+      "enemy8": {
+        "spawn point": [840, 760],
+        "path": [
+          [[840, 760], false],
+          [[1120, 80], true]
+        ],
+        "angle": 90
+      },
+      "enemy9": {
+        "spawn point": [880, 1200],
+        "path": [
+          [[880, 1200], true],
+          [[620, 1560], false]
+        ],
+        "angle": 180
+      },
+      "enemy10": {
+        "spawn point": [200, 1400],
+        "path": [
+          [[200, 1400], false],
+          [[400, 1560], true]
+        ],
+        "angle": 90
+      }
+
+    },
+    "walls": {
+      "wall1": "Wall(0, 200, 200, 40)",
+      "wall2": "Wall(180, 0, 40, 140)",
+      "wall3": "Wall(0, 400, 400, 40)",
+      "wall4": "Wall(380, 0, 40, 340)",
+      "wall5": "Wall(0, 600, 500, 40)",
+      "wall6": "Wall(500, 60, 40, 580)",
+      "wall7": "Wall(160, 720, 500, 40)",
+      "wall8": "Wall(600, 0, 40, 720)",
+      "wall9": "Wall(0, 800, 40, 160)",
+      "wall10": "Wall(240, 860, 160, 40)",
+      "wall11": "Wall(860, 200, 40, 180)",
+      "wall12": "Wall(400, 860, 40, 180)",
+      "wall13": "Wall(560, 820, 40, 300)",
+      "wall14": "Wall(40, 1120, 520, 40)",
+      "wall15": "Wall(560, 820, 40, 300)",
+      "wall16": "Wall(760, 0, 40, 1160)",
+      "wall17": "Wall(0, 1220, 800, 40)",
+      "wall18": "Wall(800, 800, 320, 40)",
+      "wall19": "Wall(600, 1260, 40, 260)"
+    }
+  },
+  "lvl5": {
+    "player": {
+      "spawn point": [1140, 760]
+    },
+    "enemies": {
+      "enemy1": {
+        "spawn point": [1000, 600],
+        "path": [
+          [[1000, 600], false],
+          [[1000, 820], false]
+        ],
+        "angle": 0
+      },
+      "enemy2": {
+        "spawn point": [1140, 300],
+        "path": [
+          [[1140, 300], true],
+          [[920, 40], false]
+        ],
+        "angle": 0
+      },
+      "enemy3": {
+        "spawn point": [900, 180],
+        "path": [
+          [[900, 180], false],
+          [[900, 520], false]
+        ],
+        "angle": 0
+      },
+      "enemy4": {
+        "spawn point": [480, 480],
+        "path": [
+          [[480, 480], false],
+          [[540, 200], true]
+        ],
+        "angle": 90
+      },
+      "enemy5": {
+        "spawn point": [300, 180],
+        "path": [
+          [[300, 180], false],
+          [[460, 400], true]
+        ],
+        "angle": 90
+      },
+      "enemy6": {
+        "spawn point": [180, 800],
+        "path": [
+          [[180, 800], false],
+          [[180, 380], false]
+        ],
+        "angle": 0
+      },
+      "enemy7": {
+        "spawn point": [80, 1080],
+        "path": [
+          [[80, 1080], true],
+          [[400, 1080], true]
+        ],
+        "angle": 90
+      },
+      "enemy8": {
+        "spawn point": [80, 640],
+        "path": [
+          [[80, 640], false],
+          [[80, 40], false]
+        ],
+        "angle": 0
+      },
+      "enemy9": {
+        "spawn point": [100, 1200],
+        "path": [
+          [[100, 1200], false],
+          [[360, 1300], true]
+        ],
+        "angle": 90
+      },
+      "enemy10": {
+        "spawn point": [400, 620],
+        "path": [
+          [[400, 620], false],
+          [[700, 960], true]
+        ],
+        "angle": 90
+      },
+      "enemy11": {
+        "spawn point": [540, 760],
+        "path": [
+          [[540, 760], false],
+          [[540, 1220], false]
+        ],
+        "angle": 180
+
+      },
+      "enemy12": {
+        "spawn point": [700, 1180],
+        "path": [
+          [[700, 1180], true],
+          [[1000, 1180], true]
+        ],
+        "angle": 90
+      },
+      "enemy13": {
+        "spawn point": [800, 960],
+        "path": [
+          [[800, 960], true],
+          [[1080, 1060], false]
+        ],
+        "angle": 0
+      },
+      "enemy14": {
+        "spawn point": [640, 1440],
+        "path": [
+          [[640, 1440], true],
+          [[860, 1560], false]
+        ]
+      }
+    },
+    "wall": {
+      "wall1": "Wall(120, 80, 920, 40)",
+      "wall2": "Wall(100, 1000, 40, 880)",
+      "wall3": "Wall(220, 900, 40, 780)",
+      "wall4": "Wall(320, 540, 420, 40)",
+      "wall5": "Wall(120, 1000, 200, 40)",
+      "wall6": "Wall(320, 1040, 40, 460)",
+      "wall7": "Wall(440, 660, 220, 40)",
+      "wall8": "Wall(620, 1260, 40, 560)",
+      "wall9": "Wall(740, 1140, 40, 600)",
+      "wall10": "Wall860, 980, 220, 40)",
+      "wall11": "Wall(820, 760, 40, 260)",
+      "wall12": "Wall(920, 920, 40, 390)",
+      "wall13": "Wall(1040, 860, 100, 40)",
+      "wall14": "Wall(920, 520, 180, 40)",
+      "wall15": "Wall(1040, 800, 40, 140)",
+      "wall16": "Wall(1040, 620, 160, 40)",
+      "wall17": "Wall(1040, 860, 100, 40)",
+      "wall18": "Wall(40, 1100, 400, 40)",
+      "wall19": "Wall(440, 1280, 40, 500)",
+      "wall20": "Wall(620, 1260, 40, 560)",
+      "wall21": "Wall(660, 1220, 560, 40)",
+      "wall22": "Wall(780, 1100, 390, 40)",
+      "wall23": "Wall(40, 1380, 1140, 40)",
+      "wall24": "Wall(720, 1500, 480, 40)",
+      "wall25": "Wall(1040, 80, 60, 360)",
+      "wall26": "Wall(860, 120, 40, 280)",
+      "wall27": "Wall(680, 540, 40, 240)",
+      "wall28": "Wall(540, 100, 40, 320)",
+      "wall29": "Wall(360, 540, 40, 260)"
+    }
   }
 }
