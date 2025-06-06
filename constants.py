@@ -4,7 +4,7 @@ class Constants:
         self.WINDOW_HEIGHT = 1600
         self.WINDOW_WIDTH = 1200
         self.WINDOW_CAPTION = "Cappastona"
-        self.FPS = 60
+        self.FPS = 120
         with open('levels.json', 'r') as f:
             self.levels = json.load(f)
 
@@ -15,3 +15,4 @@ class Constants:
         self.PLAYER = self.SPRITES["player"]
         self.ENEMIES = self.SPRITES["enemies"]
         self.WALLS = self.SPRITES["walls"]
+        self.PORTAL = self.SPRITES["portal"]

@@ -9,6 +9,7 @@ import pygame
 from pygame import key
 import json
 import sys
+from portal import *
 
 class CappastonaGame:
     def __init__(self, user, level=1):
@@ -20,6 +21,8 @@ class CappastonaGame:
         # Initialize sprites
         self.player = Player(self.C.PLAYER["spawn point"])  # top left corner
 
+        self.portal = Portal(self.C.PORTAL)
+
         self.walls = {}  # dict of wall sprites
         for index, wall in enumerate(self.C.WALLS.values()):
             self.walls[index] = eval(wall)
@@ -30,7 +33,7 @@ class CappastonaGame:
 
         self.game_manager = GameManager()
 
-        self.sprites = [self.player] + list(self.walls.values()) + list(self.enemies.values())
+        self.sprites = [self.portal] + [self.player] + list(self.walls.values()) + list(self.enemies.values())
         self.wall_list = list(self.walls.values())
 
 
@@ -65,7 +68,7 @@ class CappastonaGame:
                     self.window.blit(sprite.fov.image, sprite.fov.rect)
 
 
-            self.game_manager.update(self.player, list(self.enemies.values()), keys, self.window)
+            self.game_manager.update(self.player, list(self.enemies.values()), keys, self.window, self.portal)
             pygame.display.update()
 
             # check if player has won and wants to go to the next level
@@ -86,6 +89,10 @@ class CappastonaGame:
         pygame.quit()
         sys.exit()
 
-if __name__ == "__main__":
-    game = CappastonaGame()
-    game.run_game()
+    def set_fps(self, fps: int):
+        self.C.FPS = fps
+
+    def set_volume(self, volume: float):  # 1.00-0
+        self.game_manager.volume = volume
+
+

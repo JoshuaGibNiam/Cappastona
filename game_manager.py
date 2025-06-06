@@ -2,10 +2,11 @@ import pygame
 
 class GameManager:
     def __init__(self):
+        self.volume = 1.0
         pygame.init()
         pygame.font.init()
         pygame.mixer.init()
-        pygame.mixer.music.set_volume(1.0)
+        pygame.mixer.music.set_volume(self.volume)
 
         self.score = 0
         self.state = "Ongoing"   # "Ongoing", "Won", "Lost"
@@ -18,7 +19,10 @@ class GameManager:
         self.die_sound = pygame.mixer.Sound("die_sound_effect.mp3")
         self.kill_sound = pygame.mixer.Sound("kill_sound_effect.mp3")
 
-    def update(self, player, enemies, keys, window):  # enemies in list
+    def update(self, player, enemies, keys, window, portal):  # enemies in list
+        pygame.mixer.music.set_volume(self.volume)
+
+        self.portal = portal
         self.player = player
         self.enemies = enemies
         self.keys = keys
@@ -56,8 +60,8 @@ class GameManager:
                 enemy.speed = 0
 
                 self.enemy_killed += 1
-                if self.enemy_killed >= (self.enemycount):
-                    self.win()
+            if self.enemy_killed >= (self.enemycount) and self.portal.rect.colliderect(self.player.rect):
+                self.win()
 
         if self.state == "Lost":
             self.text_surface = self.font.render("You Lost! Press R to Restart", True, (100, 0, 0))

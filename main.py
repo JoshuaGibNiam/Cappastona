@@ -2,7 +2,7 @@ import ttkbootstrap as ttk
 import json
 import tkinter.messagebox
 import tkinter as tk
-from game_pygame import *
+from game import *
 import threading
 
 
