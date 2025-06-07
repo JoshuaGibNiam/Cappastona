@@ -19,8 +19,11 @@ class GameManager:
         self.die_sound = pygame.mixer.Sound("die_sound_effect.mp3")
         self.kill_sound = pygame.mixer.Sound("kill_sound_effect.mp3")
 
-    def update(self, player, enemies, keys, window, portal):  # enemies in list
+    def set_volume(self, volume):
+        self.volume = volume
         pygame.mixer.music.set_volume(self.volume)
+
+    def update(self, player, enemies, keys, window, portal):  # enemies in list
 
         self.portal = portal
         self.player = player

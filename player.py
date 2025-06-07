@@ -19,8 +19,9 @@ class Player(pygame.sprite.Sprite):
 
         self.speed = 5
 
-    def update(self, keys, sprites):
+    def update(self, keys, sprites, delta_time):
         ## keybind movement plus wall constraints
+        speed = self.speed * delta_time
         if keys[pygame.K_UP]:
             self.rect.y -= self.speed
             #collision

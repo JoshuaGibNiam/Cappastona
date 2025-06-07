@@ -59,6 +59,11 @@ class TitleScreen:
             self.logout_button = ttk.Button(self.root, text="Log Out", bootstyle="danger", command=self.logout)
             self.logout_button.pack(expand=True, padx=5, pady=5, ipadx=50, ipady=20, side="bottom")
 
+            self.settings_image = tk.PhotoImage(file="settings_button.png")
+            self.settings_button = ttk.Button(self.root, bootstyle="secondary", image=self.settings_image,
+                                              command=self.setting)
+            self.settings_button.pack(side="bottom", expand=True, padx=5, pady=5)
+
 
 
 
@@ -101,6 +106,13 @@ class TitleScreen:
 
         self.back_button = ttk.Button(self.bottom_frame, bootstyle="secondary", text="Back", command=self.back)
         self.back_button.pack(side="left", expand=True, padx=5, pady=5, ipadx=500, ipady=10)
+
+        self.fps_value = ttk.IntVar()
+        self.fps_value.set(60)
+        self.volume_value = ttk.DoubleVar()
+        self.volume_value.set(0.9)  # Default volume
+
+
 
     def login(self):
         """logs user in"""
@@ -175,6 +187,55 @@ class TitleScreen:
         self.back_button = ttk.Button(self.bottom_frame, bootstyle="secondary", text="Back", command=self.back)
         self.back_button.pack(side="left", expand=True, padx=5, pady=5, ipadx=500, ipady=10)
 
+    def setting(self):
+        if self.logged_in_state.get() == 'Logged In as Guest':
+            self.logged_in_state_label.pack_forget()
+            self.option_frame.pack_forget()
+        elif self.logged_in_state.get() != 'Logged In as Guest':
+            self.logged_in_state_label.pack_forget()
+            self.launch_button.pack_forget()
+            self.logout_button.pack_forget()
+            self.settings_button.pack_forget()
+
+        self.slider_frame = ttk.Frame(self.root)
+        self.slider_frame.pack(fill="both", expand=True)
+
+
+        self.fps_label = ttk.Label(self.slider_frame, text="Frame rate", bootstyle="primary")
+        self.fps_label.pack(expand=True, padx=5, pady=5)
+        self.fps_slider = ttk.Scale(self.slider_frame, from_=30, to=200, orient="horizontal", length=300, bootstyle="primary", variable=self.fps_value)
+        self.fps_slider.pack(fill="x", expand=True, padx=5, pady=5)
+        self.fps_value_label = ttk.Label(self.slider_frame, bootstyle="secondary", textvariable=self.fps_value)
+        self.fps_value_label.pack(fill="x", expand=True, padx=5, pady=5)
+
+
+        self.volume_label = ttk.Label(self.slider_frame, text="Game Volume", bootstyle="primary")
+        self.volume_label.pack(expand=True, padx=5, pady=5)
+        self.volume_slider = ttk.Scale(self.slider_frame,
+            from_=0.0,
+            to=100,
+            orient="horizontal",
+            length=300,
+            bootstyle="primary",
+            variable=self.volume_value
+        )
+        self.volume_slider.pack(fill="x", expand=True, padx=5, pady=5)
+
+        self.volume_value_label = ttk.Label(
+            self.slider_frame,
+            bootstyle="secondary",
+            textvariable=self.volume_value
+        )
+        self.volume_value_label.pack(fill="x", expand=True, padx=5, pady=5)
+
+        self.back_button = ttk.Button(self.root, bootstyle="secondary", text="Back", command=self.back)
+        self.back_button.pack(side="left", expand=True, padx=5, pady=5, ipadx=500, ipady=10)
+
+
+
+
+
+
     def signup(self):
         """signup stuff"""
         ## 1. Dump into json file
@@ -225,7 +286,10 @@ class TitleScreen:
         with open("accounts.json", "r") as f:
             self.accounts = json.load(f)
         self.game = CappastonaGame(self.loggedin_account, self.accounts[self.loggedin_account]["level"])
+        self.game.set_fps(self.fps_value.get())
+        self.game.set_volume(self.volume_value.get() / 100)
         self.game.run_game()
+
 
     def close_pygame(self):
         try:

@@ -47,6 +47,7 @@ class CappastonaGame:
 
     def run_game(self):
         while self.run:
+            delta_time = self.clock.get_time() / 1000
             keys = key.get_pressed()
             self.clock.tick(self.C.FPS)  # 60 fps
             for event in pygame.event.get():
@@ -54,7 +55,7 @@ class CappastonaGame:
                     self.run = False
                     self.hard_quit()
 
-            self.player.update(keys, self.wall_list)
+            self.player.update(keys, self.wall_list, delta_time)
             for index, value in self.enemies.items():
                 value.update(self.C.ENEMIES[f"enemy{index+1}"]["path"])
 
@@ -93,6 +94,7 @@ class CappastonaGame:
         self.C.FPS = fps
 
     def set_volume(self, volume: float):  # 1.00-0
-        self.game_manager.volume = volume
+
+        self.game_manager.set_volume(volume)
 
 
