@@ -22,23 +22,23 @@ class Player(pygame.sprite.Sprite):
     def update(self, keys, sprites, delta_time):
         ## keybind movement plus wall constraints
         speed = self.speed * delta_time
-        if keys[pygame.K_UP]:
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
             self.rect.y -= self.speed
             #collision
             for sprite in sprites:
                 if self.rect.colliderect(sprite):
                     self.rect.top = sprite.rect.bottom
-        if keys[pygame.K_DOWN]:
+        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
             self.rect.y += self.speed
             for sprite in sprites:
                 if self.rect.colliderect(sprite):
                     self.rect.bottom = sprite.rect.top
-        if keys[pygame.K_LEFT]:
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.rect.x -= self.speed
             for sprite in sprites:
                 if self.rect.colliderect(sprite):
                     self.rect.left = sprite.rect.right
-        if keys[pygame.K_RIGHT]:
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
             self.rect.x += self.speed
             for sprite in sprites:
                 if self.rect.colliderect(sprite):
