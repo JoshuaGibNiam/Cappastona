@@ -19,7 +19,7 @@ class TitleScreen:
         self.title_screen()
         self.root.mainloop()
 
-        with open("accounts.json", "r") as f:
+        with open("jsonfiles/accounts.json", "r") as f:
             self.accounts = json.load(f)
     def title_screen(self):
         self.root = root
@@ -59,7 +59,7 @@ class TitleScreen:
             self.logout_button = ttk.Button(self.root, text="Log Out", bootstyle="danger", command=self.logout)
             self.logout_button.pack(expand=True, padx=5, pady=5, ipadx=50, ipady=20, side="bottom")
 
-            self.settings_image = tk.PhotoImage(file="settings_button.png")
+            self.settings_image = tk.PhotoImage(file="Images/settings_button.png")
             self.settings_button = ttk.Button(self.root, bootstyle="secondary", image=self.settings_image,
                                               command=self.setting)
             self.settings_button.pack(side="bottom", expand=True, padx=5, pady=5)
@@ -108,9 +108,9 @@ class TitleScreen:
         self.back_button.pack(side="left", expand=True, padx=5, pady=5, ipadx=500, ipady=10)
 
         self.fps_value = ttk.IntVar()
-        self.fps_value.set(60)
+        self.fps_value.set(90)
         self.volume_value = ttk.DoubleVar()
-        self.volume_value.set(0.9)  # Default volume
+        self.volume_value.set(75)  # Default volume
 
 
 
@@ -118,7 +118,7 @@ class TitleScreen:
         """logs user in"""
 
         ## 1. load data
-        with open("accounts.json", "r") as file:
+        with open("jsonfiles/accounts.json", "r") as file:
             self.accounts = json.load(file)
 
         ## 2. conditional statements
@@ -241,7 +241,7 @@ class TitleScreen:
         ## 1. Dump into json file
         account_data = {self.username.get(): {"password": self.password.get(), "level": 1}}
         self.accounts[self.username.get()] = {"password": self.password.get(), "level": 1}
-        with open("accounts.json", "w") as file:
+        with open("jsonfiles/accounts.json", "w") as file:
             json.dump(self.accounts, file, indent=4)
 
         ## 2. Messagebox
@@ -283,7 +283,7 @@ class TitleScreen:
         threading.Thread(target=self.run_game, daemon=True).start()
 
     def run_game(self):
-        with open("accounts.json", "r") as f:
+        with open("jsonfiles/accounts.json", "r") as f:
             self.accounts = json.load(f)
         self.game = CappastonaGame(self.loggedin_account, self.accounts[self.loggedin_account]["level"])
         self.game.set_fps(self.fps_value.get())

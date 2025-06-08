@@ -1,13 +1,21 @@
 import pygame
+import time
+from constants import *
+import random
+from powerups import *
 
 class GameManager:
     def __init__(self):
+        self.powerups = []
+
+        self.constants = Constants()
+
         self.volume = 1.0
         pygame.init()
         pygame.font.init()
         pygame.mixer.init()
         pygame.mixer.music.set_volume(self.volume)
-        pygame.mixer.music.load("Woody Path.mp3")
+        pygame.mixer.music.load("Music/Woody Path.mp3")
         pygame.mixer.music.play(-1)
 
         self.score = 0
@@ -18,16 +26,18 @@ class GameManager:
         self.score = None
         self.provisional_score = 0
 
-        self.die_sound = pygame.mixer.Sound("die_sound_effect.mp3")
-        self.kill_sound = pygame.mixer.Sound("kill_sound_effect.mp3")
+        self.die_sound = pygame.mixer.Sound("Music/die_sound_effect.mp3")
+        self.kill_sound = pygame.mixer.Sound("Music/kill_sound_effect.mp3")
         self.die_sound.set_volume(self.volume)
         self.kill_sound.set_volume(self.volume)
 
     def set_volume(self, volume):
         self.volume = volume
         pygame.mixer.music.set_volume(self.volume)
+        self.die_sound.set_volume(self.volume)
+        self.kill_sound.set_volume(self.volume)
 
-    def update(self, player, enemies, keys, window, portal):  # enemies in list
+    def update(self, player, enemies, keys, window, portal, walls):  # enemies in list
 
         self.portal = portal
         self.player = player
@@ -101,6 +111,33 @@ class GameManager:
             self.player.reset()
             for enemy in enemies:
                 enemy.reset()
+
+        # manage powerups to make them spawn randomly at a .2%percent change every frame
+
+        random_num = random.randint(1, 1000)
+        if random_num in [1, 2]:
+            self.powerups.append(SpeedUp(random.randint(0, self.constants.WINDOW_WIDTH),
+                                         random.randint(0, self.constants.WINDOW_HEIGHT)))
+            while True:
+                powerup = self.powerups[-1]
+                if not any(powerup.rect.colliderect(wall.rect) for wall in walls):
+                    break
+                powerup.teleport(random.randint(0, self.constants.WINDOW_WIDTH),
+                                 random.randint(0, self.constants.WINDOW_HEIGHT))
+
+        for powerup in self.powerups[:]:
+            if powerup.rect.colliderect(self.player.rect) and self.player.speed_boost_end_time <= 0:
+                self.player.speed += 2
+                self.player.speed_boost_end_time = time.time() + 5
+                powerup.teleport(10000, 10000)
+                self.powerups.remove(powerup)
+
+            self.window.blit(powerup.image, powerup.rect)
+
+        if self.player.speed_boost_end_time > 0 and time.time() > self.player.speed_boost_end_time:
+            self.player.speed_boost_end_time = 0
+            self.player.speed -= 2
+
 
 
 

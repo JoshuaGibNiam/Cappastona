@@ -5,7 +5,7 @@ class Constants:
         self.WINDOW_WIDTH = 1200
         self.WINDOW_CAPTION = "Cappastona"
         self.FPS = 120
-        with open('levels.json', 'r') as f:
+        with open('jsonfiles/levels.json', 'r') as f:
             self.levels = json.load(f)
 
     def set_level(self, level: int) -> None:

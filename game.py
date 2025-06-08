@@ -69,15 +69,16 @@ class CappastonaGame:
                     self.window.blit(sprite.fov.image, sprite.fov.rect)
 
 
-            self.game_manager.update(self.player, list(self.enemies.values()), keys, self.window, self.portal)
+            self.game_manager.update(self.player, list(self.enemies.values()),
+                                     keys, self.window, self.portal, self.wall_list)
             pygame.display.update()
 
             # check if player has won and wants to go to the next level
             if self.game_manager.state == "Won" and keys[pygame.K_n]:
-                with open("accounts.json", "r") as f:
+                with open("jsonfiles/accounts.json", "r") as f:
                     accounts = json.load(f)
                 accounts[self.user]["level"] += 1
-                with open("accounts.json", "w") as f:
+                with open("jsonfiles/accounts.json", "w") as f:
                     json.dump(accounts, f, indent=4)
 
                 break

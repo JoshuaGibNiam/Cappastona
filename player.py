@@ -7,8 +7,8 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, xy):
         super().__init__()
 
-        self.unscaled_image_normal = pygame.image.load("player_normal.png")
-        self.unscaled_image_killed = pygame.image.load("player_killed.png")
+        self.unscaled_image_normal = pygame.image.load("Images/player_normal.png")
+        self.unscaled_image_killed = pygame.image.load("Images/player_killed.png")
         self.image_types = [pygame.transform.scale(self.unscaled_image_normal, (50, 50)), pygame.transform.scale(self.unscaled_image_killed, (50, 50))]
         self.image = self.image_types[0] # normal
         self.image.fill((0, 0, 0))  ## Color black
@@ -17,6 +17,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.topleft = (xy[0], xy[1])
         self.starting_pos = self.rect.topleft
 
+        self.speed_boost_end_time = 0
         self.speed = 5
 
     def update(self, keys, sprites, delta_time):
