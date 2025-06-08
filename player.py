@@ -10,17 +10,20 @@ class Player(pygame.sprite.Sprite):
         self.unscaled_image_normal = pygame.image.load("Images/player_normal.png")
         self.unscaled_image_killed = pygame.image.load("Images/player_killed.png")
         self.unscaled_image_speedup = pygame.image.load("Images/player_speedup.png")
+        self.unscaled_image_invincible = pygame.image.load("Images/player_invincible.png")
         self.image_types = [pygame.transform.scale(self.unscaled_image_normal, (50, 50)), pygame.transform.scale(self.unscaled_image_killed, (50, 50)),
-                            pygame.transform.scale(self.unscaled_image_speedup, (50, 50))]
+                            pygame.transform.scale(self.unscaled_image_speedup, (50, 50)), pygame.transform.scale(self.unscaled_image_invincible, (50, 50))]
         self.image = self.image_types[0] # normal
         self.image.fill((0, 0, 0))  ## Color black
 
         self.rect = self.image.get_rect()
         self.rect.topleft = (xy[0], xy[1])
         self.starting_pos = self.rect.topleft
+        self.speed = 5
 
         self.speed_boost_end_time = 0
-        self.speed = 5
+        self.invincible_end_time = 0
+        self.invincible = False
 
     def update(self, keys, sprites, delta_time):
         ## keybind movement plus wall constraints

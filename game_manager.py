@@ -58,7 +58,7 @@ class GameManager:
         for enemy in self.enemies:
 
             # if fov touching player
-            if enemy.fov.rect.colliderect(player.rect):
+            if enemy.fov.rect.colliderect(player.rect) and self.player.invincible == False:
 
                 self.die_sound.play()
                 self.player.image = self.player.image_types[1]
@@ -112,10 +112,10 @@ class GameManager:
             for enemy in enemies:
                 enemy.reset()
 
-        # manage powerups to make them spawn randomly at a .2%percent change every frame
+        # manage powerups to make them spawn randomly
 
-        random_num = random.randint(1, 1000)
-        if random_num in [1, 2]:
+        random_num = random.randint(1, 10000)
+        if random_num in range(1, 20):  # 0.2%
             self.powerups.append(SpeedUp(random.randint(0, self.constants.WINDOW_WIDTH),
                                          random.randint(0, self.constants.WINDOW_HEIGHT)))
             while True:
@@ -125,13 +125,31 @@ class GameManager:
                 powerup.teleport(random.randint(0, self.constants.WINDOW_WIDTH),
                                  random.randint(0, self.constants.WINDOW_HEIGHT))
 
+        if random_num in range(1, 5):  # 0.05 %
+            self.powerups.append(Invincible(random.randint(0, self.constants.WINDOW_WIDTH),
+                                         random.randint(0, self.constants.WINDOW_HEIGHT)))
+            while True:
+                powerup = self.powerups[-1]
+                if not any(powerup.rect.colliderect(wall.rect) for wall in walls):
+                    break
+                powerup.teleport(random.randint(0, self.constants.WINDOW_WIDTH),
+                                 random.randint(0, self.constants.WINDOW_HEIGHT))
+
         for powerup in self.powerups[:]:
-            if powerup.rect.colliderect(self.player.rect) and self.player.speed_boost_end_time <= 0:
-                self.player.speed += 2
-                self.player.speed_boost_end_time = time.time() + 5
-                self.player.image = self.player.image_types[2]  # change player image to sped up
-                powerup.teleport(10000, 10000)
-                self.powerups.remove(powerup)
+            if powerup.rect.colliderect(self.player.rect):
+                if isinstance(powerup, SpeedUp) and self.player.speed_boost_end_time <= 0:
+                    self.player.speed += 2
+                    self.player.speed_boost_end_time = time.time() + 5
+                    self.player.image = self.player.image_types[2]  # sped-up image
+                    powerup.teleport(10000, 10000)
+                    self.powerups.remove(powerup)
+
+                elif isinstance(powerup, Invincible) and self.player.invincible_end_time <= 0:
+                    self.player.invincible = True
+                    self.player.invincible_end_time = time.time() + 5  # 5 seconds of invincibility
+                    self.player.image = self.player.image_types[3]  # invincible image
+                    powerup.teleport(10000, 10000)
+                    self.powerups.remove(powerup)
 
             self.window.blit(powerup.image, powerup.rect)
 
@@ -139,6 +157,11 @@ class GameManager:
             self.player.speed_boost_end_time = 0
             self.player.speed -= 2
 
+            self.player.image = self.player.image_types[0]
+
+        if self.player.invincible_end_time > 0 and time.time() > self.player.invincible_end_time:
+            self.player.invincible_end_time = 0
+            self.player.invincible = False
             self.player.image = self.player.image_types[0]
 
 
