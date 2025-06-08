@@ -24,6 +24,8 @@ class enemy_1(pygame.sprite.Sprite):
 
         self.pos = pygame.math.Vector2(self.rect.topleft)
 
+        self.attack_rate = 1.4
+
     def rotate_and_check(self, angle, tx):
         print(f"rotate_and_check function called, x = {self.rect.x}")
         check = self.rotate_toward(angle, tx)

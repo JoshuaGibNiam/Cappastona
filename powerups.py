@@ -22,3 +22,4 @@ class Invincible(pygame.sprite.Sprite):
 
     def teleport(self, x, y):
         self.rect.topleft = (x, y)
+

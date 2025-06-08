@@ -40,7 +40,7 @@ class GameManager:
         self.die_sound.set_volume(self.volume)
         self.kill_sound.set_volume(self.volume)
 
-    def update(self, player, enemies, keys, window, portal, walls):  # enemies in list
+    def update(self, player, enemies, keys, window, portal, walls, healthbar):  # enemies in list
 
         self.portal = portal
         self.player = player
@@ -48,6 +48,7 @@ class GameManager:
         self.keys = keys
         self.enemycount = len(self.enemies)
         self.window = window
+        self.healthbar = healthbar
 
         # show score while game is running
         if self.score is None:
@@ -56,23 +57,26 @@ class GameManager:
             if self.provisional_score <= 0:
                 self.provisional_score = 0
             self.score_text = self.font.render(str(self.provisional_score), True, (0, 0, 255))
-            self.window.blit(self.score_text, (0,0))
+            self.window.blit(self.score_text, (0, 0))
 
         for enemy in self.enemies:
 
             # if fov touching player
             if enemy.fov.rect.colliderect(player.rect) and self.player.invincible == False:
+                self.player.health -= enemy.attack_rate
+                self.healthbar.update(self.player.health)
 
-                self.die_sound.play()
-                self.player.image = self.player.image_types[1]
-                self.state = "Lost"
-                self.end_time = pygame.time.get_ticks()
+                if self.player.health <= 0:
+                    self.die_sound.play()
+                    self.player.image = self.player.image_types[1]
+                    self.state = "Lost"
+                    self.end_time = pygame.time.get_ticks()
 
-                self.text_surface = self.font.render("You Lost! Press R to Restart", True, (100, 0, 0))
-                window.blit(self.text_surface, (200, 300))
-                self.player.speed = 0
-                for _enemy in self.enemies:
-                    _enemy.speed = 0
+                    self.text_surface = self.font.render("You Lost! Press R to Restart", True, (100, 0, 0))
+                    window.blit(self.text_surface, (200, 300))
+                    self.player.speed = 0
+                    for _enemy in self.enemies:
+                        _enemy.speed = 0
 
             elif player.rect.colliderect(enemy.rect):
                 self.kill_sound.play()
@@ -112,6 +116,7 @@ class GameManager:
             self.start_time = pygame.time.get_ticks()
             self.enemy_killed = 0
             self.player.reset()
+            self.healthbar.update(self.player.health)
             for enemy in enemies:
                 enemy.reset()
 
@@ -166,6 +171,15 @@ class GameManager:
             self.player.invincible_end_time = 0
             self.player.invincible = False
             self.player.image = self.player.image_types[0]
+
+        # regen player health randomly at a 0.2% chance
+        if random_num in range(1, 200):
+            self.player.health += 5
+            if self.player.health > 100:
+                self.player.health = 100
+            self.healthbar.update(self.player.health)
+
+
 
 
 

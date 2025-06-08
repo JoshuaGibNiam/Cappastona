@@ -1,6 +1,6 @@
 import pygame
 from pygame import key
-from player import Player
+from player import *
 from walls import Wall
 from enemies import *
 from game_manager import GameManager
@@ -33,7 +33,10 @@ class CappastonaGame:
 
         self.game_manager = GameManager()
 
-        self.sprites = [self.portal] + [self.player] + list(self.walls.values()) + list(self.enemies.values())
+        self.healthbar = PlayerHealthBar()
+        self.health_bar_padding = Pad()
+
+        self.sprites = [self.portal] + [self.player] + list(self.walls.values()) + list(self.enemies.values()) + [self.healthbar]
         self.wall_list = list(self.walls.values())
 
 
@@ -70,7 +73,7 @@ class CappastonaGame:
 
 
             self.game_manager.update(self.player, list(self.enemies.values()),
-                                     keys, self.window, self.portal, self.wall_list)
+                                     keys, self.window, self.portal, self.wall_list, self.healthbar)
             pygame.display.update()
 
             # check if player has won and wants to go to the next level

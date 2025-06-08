@@ -25,6 +25,8 @@ class Player(pygame.sprite.Sprite):
         self.invincible_end_time = 0
         self.invincible = False
 
+        self.health = 100
+
     def update(self, keys, sprites, delta_time):
         ## keybind movement plus wall constraints
         speed = self.speed * delta_time
@@ -67,6 +69,35 @@ class Player(pygame.sprite.Sprite):
 
         self.image = self.image_types[0]
 
+        self.health = 0
+
+
+class PlayerHealthBar(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.x_length = 300
+        self.image = pygame.Surface((self.x_length, 40), pygame.SRCALPHA)
+        self.image.fill((255, 0, 0, 100))
+
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (C.WINDOW_WIDTH - 200, C.WINDOW_HEIGHT - 60)
+
+    def update(self, player_health):
+        if player_health < 0:
+            self.x_length = 0
+        else:
+            self.x_length = player_health * 3
+        self.image = pygame.Surface((self.x_length, 40), pygame.SRCALPHA)
+        self.image.fill((255, 0, 0, 100))
+
+class Pad(pygame.sprite.Sprite):  # padding for the health bar
+    def __init__(self):
+        super().__init__()
+        self.image = pygame.Surface((300, 40), pygame.SRCALPHA)
+        self.image.fill((60, 60, 60, 100))
+
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (C.WINDOW_WIDTH - 200, C.WINDOW_HEIGHT - 60)
 
 
 

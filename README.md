@@ -79,6 +79,8 @@ git clone https://github.com/JoshuaGibNiam/Cappastona
 3. More types of enemies
 4. Time limit
 5. Power-ups
+6. Add a shop
+7. Add health bar
 
 ---
 
@@ -97,5 +99,7 @@ Portal image found online;
    - Added invincibility power-up: The player will be invincible (cannot be killed) for 3 seconds. This power-up
         spawns rarely.
    - Added more background music.
+   - Added a healthbar system. Enemy attack rate set to 1.4 per frame, whilst player health = 100. 
+     The healthbar is always located at the bottom right of the screen.
 
 7/6/2025, 2:36 p.m.
