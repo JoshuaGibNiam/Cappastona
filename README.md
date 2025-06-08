@@ -19,6 +19,7 @@ course world border constraints.
 having contact with these red triangle FOVs (If you do you die). Instead, you should sneak up on the enemy from behind
 where it cannot see you to kill him.
 3. After killing all the enemies, you need to walk to the portal to complete the level.
+4. After finishing a level, press N. Then, press the "launch cappastona" button again.
 
 P.S. as of today there are only 5 levels, cuz creating a level consumes much time.
 
@@ -84,7 +85,6 @@ git clone https://github.com/JoshuaGibNiam/Cappastona
 ### Credits
 Me myself, and ChatGpt;
 Sound effects & background music provided by Youtube;
-Background music: Woody Path by Eastward;
 Portal image found online;
 
 ---
@@ -96,5 +96,6 @@ Portal image found online;
       consume another speed-up power-up.
    - Added invincibility power-up: The player will be invincible (cannot be killed) for 3 seconds. This power-up
         spawns rarely.
+   - Added more background music.
 
 7/6/2025, 2:36 p.m.

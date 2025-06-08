@@ -15,7 +15,10 @@ class GameManager:
         pygame.font.init()
         pygame.mixer.init()
         pygame.mixer.music.set_volume(self.volume)
-        pygame.mixer.music.load("Music/Woody Path.mp3")
+
+        self.bgmusic = ["Music/3 minute Timer Coffee  3 minute Timer with Jazz Music  4K.mp3", "Music/321Jazz - Coffee Time [ Cafe Jazz Music 2024 ].mp3",
+                        "Music/dream, ivory - welcome and goodbye (instrumental).mp3", "Music/Woody Path.mp3"]
+        pygame.mixer.music.load(self.bgmusic[random.randint(0,len(self.bgmusic)-1)])
         pygame.mixer.music.play(-1)
 
         self.score = 0

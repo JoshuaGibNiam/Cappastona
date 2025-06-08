@@ -14,5 +14,9 @@
     "json": {
         "password": "json",
         "level": 2
+    },
+    "joshy": {
+        "password": "111",
+        "level": 2
     }
 }
