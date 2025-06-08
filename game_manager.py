@@ -129,6 +129,7 @@ class GameManager:
             if powerup.rect.colliderect(self.player.rect) and self.player.speed_boost_end_time <= 0:
                 self.player.speed += 2
                 self.player.speed_boost_end_time = time.time() + 5
+                self.player.image = self.player.image_types[2]  # change player image to sped up
                 powerup.teleport(10000, 10000)
                 self.powerups.remove(powerup)
 
@@ -137,6 +138,8 @@ class GameManager:
         if self.player.speed_boost_end_time > 0 and time.time() > self.player.speed_boost_end_time:
             self.player.speed_boost_end_time = 0
             self.player.speed -= 2
+
+            self.player.image = self.player.image_types[0]
 
 
 

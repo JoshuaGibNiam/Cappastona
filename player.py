@@ -9,7 +9,9 @@ class Player(pygame.sprite.Sprite):
 
         self.unscaled_image_normal = pygame.image.load("Images/player_normal.png")
         self.unscaled_image_killed = pygame.image.load("Images/player_killed.png")
-        self.image_types = [pygame.transform.scale(self.unscaled_image_normal, (50, 50)), pygame.transform.scale(self.unscaled_image_killed, (50, 50))]
+        self.unscaled_image_speedup = pygame.image.load("Images/player_speedup.png")
+        self.image_types = [pygame.transform.scale(self.unscaled_image_normal, (50, 50)), pygame.transform.scale(self.unscaled_image_killed, (50, 50)),
+                            pygame.transform.scale(self.unscaled_image_speedup, (50, 50))]
         self.image = self.image_types[0] # normal
         self.image.fill((0, 0, 0))  ## Color black
 

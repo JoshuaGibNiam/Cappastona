@@ -82,10 +82,10 @@ git clone https://github.com/JoshuaGibNiam/Cappastona
 ---
 
 ### Credits
-Me myself, and ChatGpt
-Sound effects & background music provided by Youtube 
-Background music: Woody Path by Eastward
-Portal image found online
+Me myself, and ChatGpt;
+Sound effects & background music provided by Youtube;
+Background music: Woody Path by Eastward;
+Portal image found online;
 
 ---
 
