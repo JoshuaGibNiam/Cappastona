@@ -16,11 +16,13 @@ class TitleScreen:
         self.logged_in_state = ttk.StringVar()
         self.logged_in_state.set('Logged In as Guest')
 
+        with open("jsonfiles/accounts.json", "r") as f:
+            self.accounts = json.load(f)
+
         self.title_screen()
         self.root.mainloop()
 
-        with open("jsonfiles/accounts.json", "r") as f:
-            self.accounts = json.load(f)
+
     def title_screen(self):
         self.root = root
         self.root.title("Cappastona")

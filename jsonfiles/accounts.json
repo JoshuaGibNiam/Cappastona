@@ -10,5 +10,9 @@
     "was": {
         "password": "111",
         "level": 1
+    },
+    "json": {
+        "password": "json",
+        "level": 2
     }
 }
