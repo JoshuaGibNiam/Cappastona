@@ -201,12 +201,12 @@ class TitleScreen:
         self.slider_frame.pack(fill="both", expand=True)
 
 
-        self.fps_label = ttk.Label(self.slider_frame, text="Frame rate", bootstyle="primary")
-        self.fps_label.pack(expand=True, padx=5, pady=5)
-        self.fps_slider = ttk.Scale(self.slider_frame, from_=30, to=200, orient="horizontal", length=300, bootstyle="primary", variable=self.fps_value)
-        self.fps_slider.pack(fill="x", expand=True, padx=5, pady=5)
-        self.fps_value_label = ttk.Label(self.slider_frame, bootstyle="secondary", textvariable=self.fps_value)
-        self.fps_value_label.pack(fill="x", expand=True, padx=5, pady=5)
+        #self.fps_label = ttk.Label(self.slider_frame, text="Frame rate", bootstyle="primary")
+        #self.fps_label.pack(expand=True, padx=5, pady=5)
+        #self.fps_slider = ttk.Scale(self.slider_frame, from_=30, to=200, orient="horizontal", length=300, bootstyle="primary", variable=self.fps_value)
+        #self.fps_slider.pack(fill="x", expand=True, padx=5, pady=5)
+        #self.fps_value_label = ttk.Label(self.slider_frame, bootstyle="secondary", textvariable=self.fps_value)
+        #self.fps_value_label.pack(fill="x", expand=True, padx=5, pady=5)
 
 
         self.volume_label = ttk.Label(self.slider_frame, text="Game Volume", bootstyle="primary")

@@ -3,7 +3,7 @@
 ---
 
 ## Description & Overview
-This is a capstone project for my python project, and (probably) is the biggest coding project
+This is a capstone project for my python course, and (probably) is the biggest coding project
 I've ever written. I started this in April (I don't know the exact date) and the project has 
 accumulated to over 1,000 lines of code. This project mainly utilizes the *ttkbootstrap* and *pygame* module
 to create a stealth action game.
@@ -83,6 +83,9 @@ git clone https://github.com/JoshuaGibNiam/Cappastona
 
 ### Credits
 Me myself, and ChatGpt
+Sound effects & background music provided by Youtube 
+Background music: Woody Path by Eastward
+Portal image found online
 
 ---
 

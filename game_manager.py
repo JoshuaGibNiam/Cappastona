@@ -7,6 +7,8 @@ class GameManager:
         pygame.font.init()
         pygame.mixer.init()
         pygame.mixer.music.set_volume(self.volume)
+        pygame.mixer.music.load("Woody Path.mp3")
+        pygame.mixer.music.play(-1)
 
         self.score = 0
         self.state = "Ongoing"   # "Ongoing", "Won", "Lost"
@@ -18,6 +20,8 @@ class GameManager:
 
         self.die_sound = pygame.mixer.Sound("die_sound_effect.mp3")
         self.kill_sound = pygame.mixer.Sound("kill_sound_effect.mp3")
+        self.die_sound.set_volume(self.volume)
+        self.kill_sound.set_volume(self.volume)
 
     def set_volume(self, volume):
         self.volume = volume
