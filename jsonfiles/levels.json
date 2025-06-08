@@ -32,7 +32,7 @@
     }
   },
   "lvl2": {
-    "portal" : [0, 0],
+    "portal" : [1140, 80],
     "player": {
       "spawn point": [1140, 80]
     },
@@ -82,7 +82,7 @@
     }
   },
   "lvl3": {
-    "portal": [0, 0],
+    "portal": [600, 600],
     "player": {
       "spawn point": [600, 600]
     },
@@ -157,7 +157,7 @@
     }
   },
   "lvl4": {
-    "portal": [0, 0],
+    "portal": [60, 80],
     "player": {
       "spawn point": [60, 80]
     },

@@ -80,7 +80,7 @@ class PlayerHealthBar(pygame.sprite.Sprite):
         self.image.fill((255, 0, 0, 100))
 
         self.rect = self.image.get_rect()
-        self.rect.topleft = (C.WINDOW_WIDTH - 200, C.WINDOW_HEIGHT - 60)
+        self.rect.topleft = (C.WINDOW_WIDTH - 400, C.WINDOW_HEIGHT - 60)
 
     def update(self, player_health):
         if player_health < 0:
@@ -97,7 +97,7 @@ class Pad(pygame.sprite.Sprite):  # padding for the health bar
         self.image.fill((60, 60, 60, 100))
 
         self.rect = self.image.get_rect()
-        self.rect.topleft = (C.WINDOW_WIDTH - 200, C.WINDOW_HEIGHT - 60)
+        self.rect.topleft = (C.WINDOW_WIDTH - 400, C.WINDOW_HEIGHT - 60)
 
 
 

@@ -112,7 +112,7 @@ class GameManager:
         if self.keys[pygame.K_r] and (self.state == "Won" or self.state == "Lost"):
             self.state = "Ongoing"
             self.score = None
-            self.provisional_score = 0
+            #self.provisional_score = 0
             self.start_time = pygame.time.get_ticks()
             self.enemy_killed = 0
             self.player.reset()
