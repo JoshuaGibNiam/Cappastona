@@ -90,8 +90,11 @@ Portal image found online;
 ---
 
 ## Update Log
- - 8/6/2025: Added first power-up: speed-up power-up. When the player comes in contact, it is given
-    a 5-second speed boost. If the player already has the speed boost effect, the player will not
-    consume another speed-up power-up.
+ - 8/6/2025: 
+   - Added first power-up: speed-up power-up. When the player comes in contact, it is given
+      a 5-second speed boost. If the player already has the speed boost effect, the player will not
+      consume another speed-up power-up.
+   - Added invincibility power-up: The player will be invincible (cannot be killed) for 3 seconds. This power-up
+        spawns rarely.
 
 7/6/2025, 2:36 p.m.
